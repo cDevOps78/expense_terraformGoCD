@@ -10,5 +10,11 @@ module "chaitu" {
   source = "./modules/app"
   modname = var.mainname
 }
+
+module "chaitu1" {
+  source = "./modules/app"
+  modname = var.mainname
+}
+
 variable "env" {}
 variable "mainname" {}
