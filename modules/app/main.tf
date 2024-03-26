@@ -1,12 +1,6 @@
-resource "null_resource" "name2" {
-  provisioner "local-exec" {
-    command = "echo this is ${var.modname}"
-  }
+resource "aws_instance" "instance" {
+  ami           = var.ami_m
+  instance_type = var.instance_type_m
+  vpc_security_group_ids = var.vpc_security_group_ids_m
+  tags          = var.tags_m
 }
-
-resource "null_resource" "name1" {
-  provisioner "local-exec" {
-    command = "echo this is ${var.modname}"
-  }
-}
-variable "modname" {}
