@@ -13,5 +13,8 @@ output "environment" {
 variable "env" {}
 
 output "my-env" {
-  value = "prod-env-environments"
+  value = "environment-${var.env}"
+}
+output "name1" {
+  value = "chaithanya-${var.env}"
 }
