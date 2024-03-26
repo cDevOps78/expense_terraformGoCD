@@ -11,3 +11,7 @@ output "environment" {
 }
 
 variable "env" {}
+
+output "my-env" {
+  value = "prod-env-environments"
+}
