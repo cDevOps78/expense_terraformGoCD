@@ -7,6 +7,7 @@ terraform {
 }
 
 module "frontend" {
+  depends_on = [module.backend]
   source                      = "./modules/app"
   ami_m                       = var.ami
   instance_type_m             = "t2.micro"
@@ -15,6 +16,7 @@ module "frontend" {
 }
 
 module "backend" {
+  depends_on = [module.mysql]
   source                      = "./modules/app"
   ami_m                       = var.ami
   instance_type_m             = "t2.micro"
