@@ -13,6 +13,8 @@ module "frontend" {
   instance_type_m             = "t2.micro"
   vpc_security_group_ids_m    = var.vpc_security_group_ids
   tags_m                      = var.tags["frontend"]
+  component_m                 = "frontend"
+  env_m                       = var.env
 }
 
 module "backend" {
@@ -22,6 +24,8 @@ module "backend" {
   instance_type_m             = "t2.micro"
   vpc_security_group_ids_m    = var.vpc_security_group_ids
   tags_m                      = var.tags["backend"]
+  component_m                 = "backend"
+  env_m                       = var.env
 }
 
 module "mysql" {
@@ -30,4 +34,6 @@ module "mysql" {
   instance_type_m             = "t3.small"
   vpc_security_group_ids_m    = var.vpc_security_group_ids
   tags_m                      = var.tags["mysql"]
+  component_m                 = "mysql"
+  env_m                       = var.env
 }
