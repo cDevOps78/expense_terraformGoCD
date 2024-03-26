@@ -12,15 +12,16 @@ if [[ "$#" < 2 ]]; then
 fi
 
 if [ -z "$env" ]; then
-  echo -e "    ${R}\$1-Input is (dev|prod) is missing ${N}"
+  echo -e "${R}\$1-Input is (dev|prod) is missing ${N}"
   exit 1
 fi
-
 
 if [ -z "$action" ]; then
-  echo -e "   ${R}\$2-Input is (plan|apply|destroy) missing"
+  echo -e "${R}\$2-Input is (plan|apply|destroy) missing"
   exit 1
 fi
+
+
 
 #rm -rf ./.terraform/terraform.tfstate
 #
