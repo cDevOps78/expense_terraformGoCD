@@ -8,6 +8,7 @@ terraform {
 
 module "chaitu" {
   source = "./modules/app"
-  modname = "Ramchaitu"
+  modname = var.mainname
 }
 
+variable "mainname" {}
