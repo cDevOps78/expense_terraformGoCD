@@ -24,8 +24,8 @@ module "backend" {
 
 module "mysql" {
   source                      = "./modules/app"
-  ami_m                       = "t3.small"
-  instance_type_m             = var.instance_type
+  ami_m                       = var.ami
+  instance_type_m             = "t3.small"
   vpc_security_group_ids_m    = var.vpc_security_group_ids
   tags_m                      = var.tags["mysql"]
 }
