@@ -6,7 +6,7 @@ env=$1
 action=$2
 
 if [ -z "$env" ]; then
-  echo -e "${R}\$1-Input is (env|prod) is missing ${N}"
+  echo -e "${R}\$1-Input is (dev|prod) is missing ${N}"
   echo -e "${G}\t #------------How to use it -------------------#"
   echo -e "\n bash $0 (env|prod) (plan|apply|destroy)"
   echo -e "\t #---------------------------------------------#{N}"
