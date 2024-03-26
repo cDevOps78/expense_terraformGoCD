@@ -1,4 +1,4 @@
-resource "null_resource" "name1" {
+resource "null_resource" "name2" {
   provisioner "local-exec" {
     command = "echo this is ${var.modname}"
   }
