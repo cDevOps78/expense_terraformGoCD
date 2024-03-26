@@ -27,9 +27,9 @@ rm -rf ./.terraform/terraform.tfstate
 
 terraform init -backend-config=env-${env}/state.tfvars
 
-if [ ${action} -eq "plan" ]; then
+if [ "${action}" -eq "plan" ]; then
   terraform ${action}  -var-file=env-${env}/main.tfvars
-  exit
+  exit 1
 fi
 
 terraform ${action} -auto-approve -var-file=env-${env}/main.tfvars
