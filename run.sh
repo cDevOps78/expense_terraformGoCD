@@ -8,7 +8,7 @@ action=$2
 if [ -z "$env" ]; then
   echo -e "${R}\$1-Input is (dev|prod) is missing ${N}"
   echo -e "${G}\t #------------How to use it -------------------#"
-  echo -e "\n bash $0 (env|prod) (plan|apply|destroy)"
+  echo -e "\tbash $0 (env|prod) (plan|apply|destroy)"
   echo -e "\t #---------------------------------------------#{N}"
   exit 1
 fi
@@ -17,8 +17,8 @@ fi
 if [ -z "$action" ]; then
   echo -e "${R}\$2-Input is (plan|apply|destroy) missing"
   echo -e "${G}\t #------------How to use it -------------------#"
-  echo -e "\n bash $0 (env|prod) (plan|apply|destroy)"
-  echo -e "\t #---------------------------------------------#{N}"
+  echo -e "\tbash $0 (env|prod) (plan|apply|destroy)"
+  echo -e "\t#---------------------------------------------#{N}"
   exit 1
 fi
 
