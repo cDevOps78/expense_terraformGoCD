@@ -4,17 +4,17 @@ vpc_security_group_ids = ["sg-037dcd68553894e24"]
 tags = {
   frontend = {
     Name    = "dev-frontend"
-    monitor = "Yes"
+    monitor = "yes"
     project = "expense-project"
   }
   backend = {
     Name    = "dev-backend"
-    monitor = "Yes"
+    monitor = "yes"
     project = "expense-project"
   }
   mysql = {
     Name    = "dev-mysql"
-    monitor = "Yes"
+    monitor = "yes"
     project = "expense-project"
   }
 }
