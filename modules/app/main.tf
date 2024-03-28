@@ -11,6 +11,7 @@ resource "aws_route53_record" "record" {
   ttl     = 30
   records = [aws_instance.instance.private_ip]
 }
+#
 #resource "null_resource" "null" {
 #  provisioner "remote-exec" {
 #    connection {
