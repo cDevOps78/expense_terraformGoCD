@@ -1,6 +1,6 @@
 format_version: 10
 pipelines:
-  expense-tf-Apply:
+  expense-tf-Destroy:
     group: expenseTerraform
     label_template: ${COUNT}
     lock_behavior: none
