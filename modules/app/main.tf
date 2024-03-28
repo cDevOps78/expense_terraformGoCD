@@ -11,17 +11,17 @@ resource "aws_route53_record" "record" {
   ttl     = 30
   records = [aws_instance.instance.private_ip]
 }
-resource "null_resource" "null" {
-  provisioner "remote-exec" {
-    connection {
-      type     = "ssh"
-      user     = "ec2-user"
-      password = "DevOps321"
-      host     = aws_instance.instance.private_ip
-    }
-    inline = [
-           "sudo labauto ansible",
-           "ansible-pull -i localhost, -U https://github.com/cDevOps78/expenseAnsibleGoCD -e env=${var.env_m} -e role_name=${var.component_m} -e component=${var.component_m} rolecall.yaml"
-    ]
-  }
-}
+#resource "null_resource" "null" {
+#  provisioner "remote-exec" {
+#    connection {
+#      type     = "ssh"
+#      user     = "ec2-user"
+#      password = "DevOps321"
+#      host     = aws_instance.instance.private_ip
+#    }
+#    inline = [
+#           "sudo labauto ansible",
+#           "ansible-pull -i localhost, -U https://github.com/cDevOps78/expenseAnsibleGoCD -e env=${var.env_m} -e role_name=${var.component_m} -e component=${var.component_m} rolecall.yaml"
+#    ]
+#  }
+#}

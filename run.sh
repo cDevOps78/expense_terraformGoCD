@@ -9,6 +9,7 @@ if [[ "$#" < 2 ]]; then
   echo -e "${G}\n\t #------------How to use it -------------------#"
   echo -e "\t     bash $0 (env|prod) (plan|apply|destroy)"
   echo -e "\t #---------------------------------------------#${N}"
+  exit 0
 fi
 
 if [ -z "$env" ]; then
@@ -29,7 +30,7 @@ terraform init -backend-config=env-${env}/state.tfvars
 
 if [ "${action}" == "plan" ]; then
   terraform ${action}  -var-file=env-${env}/main.tfvars
-  exit 1
+  exit 0
 fi
 
 terraform ${action} -auto-approve -var-file=env-${env}/main.tfvars
