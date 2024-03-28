@@ -26,7 +26,7 @@ pipelines:
                 - exec:
                     arguments:
                       - run.sh
-                      - env
+                      - dev
                       - apply
                     command: bash
                     run_if: passed
