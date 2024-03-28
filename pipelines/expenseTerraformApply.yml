@@ -7,7 +7,7 @@ pipelines:
     display_order: -1
     materials:
       git-214f6fa:
-        git: git@github.com:cDevOps78/tools-automation.git
+        git: https://github.com/cDevOps78/expense_terraformGoCD.git
         shallow_clone: false
         auto_update: true
         branch: main
