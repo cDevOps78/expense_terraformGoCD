@@ -15,7 +15,7 @@ resource "aws_instance" "instance" {
 resource "aws_route53_record" "record" {
   name    = "${var.component_m}-${var.env_m}.chaithanya.online"
   type    = "A"
-  zone_id = "Z03998933DKS43BUYGV0L"    # change this zone id
+  zone_id = "Z00454621TDP9KKTFN9DY"
   ttl     = 30
   records = [aws_instance.instance.private_ip]
 }
