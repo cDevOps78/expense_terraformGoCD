@@ -11,13 +11,17 @@ provider "vault" {
    skip_tls_verify = true
 }
 
-data "vault_kv_secret" "secret_data" {
+#data "vault_kv_secret" "secret_data" {
+#  path = "common/ssh"
+#}
+
+data "vault_generic_secret" "rundeck_auth" {
   path = "common/ssh"
 }
 
 resource "local_file" "vault" {
   filename = "/tmp/common"
-  content = data.vault_kv_secret.secret_data.data_json
+  content = data.vault_generic_secret.rundeck_auth.data_json
 }
 
 
