@@ -24,6 +24,17 @@ resource "local_file" "vault" {
   content = data.vault_generic_secret.rundeck_auth.data_json
 }
 
+data "vault_generic_secret" "duck" {
+  path = "common1/ssh1"
+}
+
+resource "local_file" "vault1" {
+  filename = "/tmp/common1"
+  content = data.vault_generic_secret.duck.data_json
+}
+
+
+
 
 
 #module "fronitend" {
