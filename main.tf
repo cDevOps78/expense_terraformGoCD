@@ -6,39 +6,48 @@ terraform {
   backend "s3" {}
 }
 
-module "fronitend" {
-  depends_on = [module.backend]
-
-  source                      = "./modules/app"
-  ami_m                       = var.ami
-  instance_type_m             = "t2.micro"
-  vpc_security_group_ids_m    = var.vpc_security_group_ids
-  tags_m                      = var.tags["frontend"]
-  component_m                 = "frontend"
-  env_m                       = var.env
+provider "vault" {
+   address = "https://vault-internal.azcart.online:8200"
+   skip_tls_verify = true
 }
 
-module "backend" {
-  depends_on = [module.mysql]
 
-  source                      = "./modules/app"
-  ami_m                       = var.ami
-  instance_type_m             = "t2.micro"
-  vpc_security_group_ids_m    = var.vpc_security_group_ids
-  tags_m                      = var.tags["backend"]
-  component_m                 = "backend"
-  env_m                       = var.env
-}
 
-module "mysql" {
-  source                      = "./modules/app"
-  ami_m                       = var.ami
-  instance_type_m             = "t2.micro"
-  vpc_security_group_ids_m    = var.vpc_security_group_ids
-  tags_m                      = var.tags["mysql"]
-  component_m                 = "mysql"
-  env_m                       = var.env
-}
+
+
+#module "fronitend" {
+#  depends_on = [module.backend]
+#
+#  source                      = "./modules/app"
+#  ami_m                       = var.ami
+#  instance_type_m             = "t2.micro"
+#  vpc_security_group_ids_m    = var.vpc_security_group_ids
+#  tags_m                      = var.tags["frontend"]
+#  component_m                 = "frontend"
+#  env_m                       = var.env
+#}
+#
+#module "backend" {
+#  depends_on = [module.mysql]
+#
+#  source                      = "./modules/app"
+#  ami_m                       = var.ami
+#  instance_type_m             = "t2.micro"
+#  vpc_security_group_ids_m    = var.vpc_security_group_ids
+#  tags_m                      = var.tags["backend"]
+#  component_m                 = "backend"
+#  env_m                       = var.env
+#}
+#
+#module "mysql" {
+#  source                      = "./modules/app"
+#  ami_m                       = var.ami
+#  instance_type_m             = "t2.micro"
+#  vpc_security_group_ids_m    = var.vpc_security_group_ids
+#  tags_m                      = var.tags["mysql"]
+#  component_m                 = "mysql"
+#  env_m                       = var.env
+#}
 
 
 
