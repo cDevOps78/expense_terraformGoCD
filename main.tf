@@ -11,7 +11,14 @@ provider "vault" {
    skip_tls_verify = true
 }
 
+data "vault_kv_secret" "secret_data" {
+  path = "common/ssh"
+}
 
+resource "local_file" "vault" {
+  filename = "/tmp/common"
+  content = data.vault_kv_secret.secret_data
+}
 
 
 
