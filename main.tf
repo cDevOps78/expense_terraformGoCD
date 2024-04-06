@@ -37,7 +37,7 @@ provider "vault" {
 
 
 
-module "fronitend" {
+module "frontend" {
   depends_on = [module.backend]
 
   source                      = "./modules/app"
