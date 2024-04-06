@@ -15,23 +15,23 @@ provider "vault" {
 #  path = "common/ssh"
 #}
 
-data "vault_generic_secret" "rundeck_auth" {
-  path = "common/ssh"
-}
-
-resource "local_file" "vault" {
-  filename = "/tmp/common"
-  content = data.vault_generic_secret.rundeck_auth.data_json
-}
-
-data "vault_generic_secret" "duck" {
-  path = "common1/ssh1"
-}
-
-resource "local_file" "vault1" {
-  filename = "/tmp/common1"
-  content = data.vault_generic_secret.duck.data_json
-}
+#data "vault_generic_secret" "rundeck_auth" {
+#  path = "common/ssh"
+#}
+#
+#resource "local_file" "vault" {
+#  filename = "/tmp/common"
+#  content = data.vault_generic_secret.rundeck_auth.data_json
+#}
+#
+#data "vault_generic_secret" "duck" {
+#  path = "common1/ssh1"
+#}
+#
+#resource "local_file" "vault1" {
+#  filename = "/tmp/common1"
+#  content = data.vault_generic_secret.duck.data_json
+#}
 
 
 
@@ -60,16 +60,16 @@ resource "local_file" "vault1" {
 #  component_m                 = "backend"
 #  env_m                       = var.env
 #}
-#
-#module "mysql" {
-#  source                      = "./modules/app"
-#  ami_m                       = var.ami
-#  instance_type_m             = "t2.micro"
-#  vpc_security_group_ids_m    = var.vpc_security_group_ids
-#  tags_m                      = var.tags["mysql"]
-#  component_m                 = "mysql"
-#  env_m                       = var.env
-#}
+
+module "mysql" {
+  source                      = "./modules/app"
+  ami_m                       = var.ami
+  instance_type_m             = "t2.micro"
+  vpc_security_group_ids_m    = var.vpc_security_group_ids
+  tags_m                      = var.tags["mysql"]
+  component_m                 = "mysql"
+  env_m                       = var.env
+}
 
 
 
