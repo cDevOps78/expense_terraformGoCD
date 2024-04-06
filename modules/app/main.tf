@@ -20,7 +20,7 @@ resource "aws_instance" "instance" {
 resource "aws_route53_record" "record" {
   name    = "${var.component_m}-${var.env_m}.azcart.online"
   type    = "A"
-  zone_id = "Z00454621TDP9KKTFN9DY"
+  zone_id = "Z0144525QEQQSOE8RRNR"
   ttl     = 30
   records = [aws_instance.instance.private_ip]
 }
