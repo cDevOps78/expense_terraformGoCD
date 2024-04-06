@@ -18,7 +18,7 @@ resource "aws_instance" "instance" {
   }
 }
 resource "aws_route53_record" "record" {
-  name    = "${var.component_m}-${var.env_m}.chaithanya.online"
+  name    = "${var.component_m}-${var.env_m}.azcart.online"
   type    = "A"
   zone_id = "Z00454621TDP9KKTFN9DY"
   ttl     = 30
