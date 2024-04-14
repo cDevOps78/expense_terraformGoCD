@@ -5,6 +5,6 @@ variable "vpc_security_group_ids_m" {}
 variable "env_m" {}
 variable "component_m" {}
 
-variable "vault_token" {}
+variable "vault_token_m" {}
 
 
