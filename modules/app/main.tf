@@ -25,21 +25,21 @@ resource "aws_route53_record" "record" {
   records = [aws_instance.instance.private_ip]
 }
 
-#resource "null_resource" "null" {
-#  provisioner "remote-exec" {
-#    connection {
-#      type     = "ssh"
-#      user     = "ec2-user"
-#      password = "DevOps321"
-#      host     = aws_instance.instance.private_ip
-#    }
-#    inline = [
-#           "sudo labauto ansible",
-#            "ansible-pull -i localhost,-U https://github.com/cDevOps78/expenseAnsibleGoCD -e env=${var.env_m} -e component=${var.component_m} -e vault_token=${VAULT_TOKEN} ",
-#           "ansible-pull -i localhost, -U https://github.com/cDevOps78/expenseAnsibleGoCD -e env=${var.env_m} -e role_name=${var.component_m} -e component=${var.component_m} -e '@common-secrets.json' -e '@${var.component_m}-secrets.json' rolecall.yaml"
-#    ]
-#  }
-#}
+resource "null_resource" "null" {
+  provisioner "remote-exec" {
+    connection {
+      type     = "ssh"
+      user     = data.vault_kv_secret.secret_data.data["ansible_user"]
+      password = data.vault_kv_secret.secret_data.data["ansible_password"]
+      host     = aws_instance.instance.private_ip
+    }
+    inline = [
+           "sudo labauto ansible",
+            "ansible-pull -i localhost,-U https://github.com/cDevOps78/expenseAnsibleGoCD -e env=${var.env_m} -e component=${var.component_m} -e vault_token=${VAULT_TOKEN} ",
+           "ansible-pull -i localhost, -U https://github.com/cDevOps78/expenseAnsibleGoCD -e env=${var.env_m} -e role_name=${var.component_m} -e component=${var.component_m} -e '@common-secrets.json' -e '@${var.component_m}-secrets.json' rolecall.yaml"
+    ]
+  }
+}
 
 
 
