@@ -5,9 +5,6 @@ variable "vpc_security_group_ids_m" {}
 variable "env_m" {}
 variable "component_m" {}
 
-
-#variable "VAULT_TOKEN" {
-#  default = "${VAULT_TOKEN}"
-#}
+variable "vault_token" {}
 
 

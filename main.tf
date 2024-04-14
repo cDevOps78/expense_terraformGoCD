@@ -69,6 +69,7 @@ module "mysql" {
   tags_m                      = var.tags["mysql"]
   component_m                 = "mysql"
   env_m                       = var.env
+  vault_token                 = var.vault_token
 }
 
 
