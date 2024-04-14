@@ -35,6 +35,7 @@ resource "null_resource" "null" {
     }
     inline = [
             "sudo labauto ansible",
+            "sudo pip3.11 install havc",
             "ansible-pull -i localhost, -U https://github.com/cDevOps78/expenseAnsibleGoCD -e env=${var.env_m} -e component=${var.component_m} -e vault_token=${var.vault_token_m} get-vault-secrets.yaml",
             "ansible-pull -i localhost, -U https://github.com/cDevOps78/expenseAnsibleGoCD -e env=${var.env_m} -e role_name=${var.component_m} -e component=${var.component_m} -e @~/${var.component_m}-secrets.json rolecall.yaml"
     ]
