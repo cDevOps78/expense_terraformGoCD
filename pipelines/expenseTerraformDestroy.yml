@@ -15,6 +15,7 @@ pipelines:
       - destroy:
           secure_variables:
             VAULT_TOKEN: "AES:/jvkC1Lso4gftkDu9XOmEg==:N8TCA8tmeOrSSuPA10zqTTvLhGmOI+Ut6sCe4jBH6BQ="
+            TF_VAR_vault_token: "AES:/jvkC1Lso4gftkDu9XOmEg==:N8TCA8tmeOrSSuPA10zqTTvLhGmOI+Ut6sCe4jBH6BQ="
           fetch_materials: true
           keep_artifacts: false
           clean_workspace: false
