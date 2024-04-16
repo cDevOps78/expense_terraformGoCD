@@ -36,43 +36,53 @@ provider "vault" {
 
 
 
+#
+#module "frontend" {
+#  depends_on = [module.backend]
+#
+#  source                      = "./modules/app"
+#  ami_m                       = "ami-090252cbe067a9e58"
+#  instance_type_m             = "t2.micro"
+#  vpc_security_group_ids_m    = var.vpc_security_group_ids
+#  tags_m                      = var.tags["frontend"]
+#  component_m                 = "frontend"
+#  env_m                       = var.env
+#  vault_token_m               = var.vault_token
+#}
+#
+#module "backend" {
+#  depends_on = [module.mysql]
+#
+#  source                      = "./modules/app"
+#  ami_m                       = "ami-090252cbe067a9e58"
+#  instance_type_m             = "t2.micro"
+#  vpc_security_group_ids_m    = var.vpc_security_group_ids
+#  tags_m                      = var.tags["backend"]
+#  component_m                 = "backend"
+#  env_m                       = var.env
+#  vault_token_m               = var.vault_token
+#}
+#
+#module "mysql" {
+#  source                      = "./modules/app"
+#  ami_m                       = var.ami
+#  instance_type_m             = "t2.micro"
+#  vpc_security_group_ids_m    = var.vpc_security_group_ids
+#  tags_m                      = var.tags["mysql"]
+#  component_m                 = "mysql"
+#  env_m                       = var.env
+#  vault_token_m               = var.vault_token
+#}
 
-module "frontend" {
-  depends_on = [module.backend]
 
-  source                      = "./modules/app"
-  ami_m                       = "ami-090252cbe067a9e58"
-  instance_type_m             = "t2.micro"
-  vpc_security_group_ids_m    = var.vpc_security_group_ids
-  tags_m                      = var.tags["frontend"]
-  component_m                 = "frontend"
-  env_m                       = var.env
-  vault_token_m               = var.vault_token
+# VPC Code #
+module "dev-vpc" {
+  source                   = "./modules/vpc"
+  vpc_cidr_block_m         = var.vpc_cidr_block
+  env_m                = var.env
+  subnet_cidr_block_m  = var.subnet_cidr_block
 }
 
-module "backend" {
-  depends_on = [module.mysql]
-
-  source                      = "./modules/app"
-  ami_m                       = "ami-090252cbe067a9e58"
-  instance_type_m             = "t2.micro"
-  vpc_security_group_ids_m    = var.vpc_security_group_ids
-  tags_m                      = var.tags["backend"]
-  component_m                 = "backend"
-  env_m                       = var.env
-  vault_token_m               = var.vault_token
-}
-
-module "mysql" {
-  source                      = "./modules/app"
-  ami_m                       = var.ami
-  instance_type_m             = "t2.micro"
-  vpc_security_group_ids_m    = var.vpc_security_group_ids
-  tags_m                      = var.tags["mysql"]
-  component_m                 = "mysql"
-  env_m                       = var.env
-  vault_token_m               = var.vault_token
-}
 
 
 
