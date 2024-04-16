@@ -6,10 +6,10 @@ terraform {
   backend "s3" {}
 }
 
-provider "vault" {
-   address = "https://vault-internal.azcart.online:8200"
-   skip_tls_verify = true
-}
+#provider "vault" {
+#   address = "https://vault-internal.azcart.online:8200"
+#   skip_tls_verify = true
+#}
 
 #data "vault_kv_secret" "secret_data" {
 #  path = "common/ssh"
