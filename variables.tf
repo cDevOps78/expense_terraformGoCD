@@ -7,7 +7,7 @@ variable "vault_token" {}
 
 
 # VPC
-variable "name" {}
+
 
 variable "vpc_cidr_block" {}
 variable "subnet_cidr_block" {}
