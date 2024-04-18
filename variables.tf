@@ -8,5 +8,7 @@ variable "vault_token" {}
 
 # VPC
 
+variable "default-vpc-id" {}
+
 
 

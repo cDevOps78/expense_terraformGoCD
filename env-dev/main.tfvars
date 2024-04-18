@@ -17,6 +17,6 @@ env = "dev"
 
 # VPC
 
-
+default-vpc-id = "vpc-0dfa2ee2180ae8e1a"
 
 
