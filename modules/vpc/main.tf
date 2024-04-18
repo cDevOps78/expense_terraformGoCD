@@ -43,8 +43,9 @@ resource "aws_subnet" "frontend" {
 
   vpc_id = aws_vpc.dev.id
   cidr_block = var.frontend_subnets[count.index]
+  availability_zone = var.available_zone[count.index]
 
   tags = {
-    Name = "${var.env_m}-frontend${count.index}-${var.frontend_subnets[count.index]}"
+    Name = "${var.env_m}-frontend${count.index}-${var.available_zone[count.index]}-${var.frontend_subnets[count.index]}"
   }
 }
