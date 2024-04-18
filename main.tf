@@ -77,6 +77,10 @@ terraform {
 
 # VPC Code #
 
+module "dev-vpc" {
+  source = "./modules/vpc"
+  env_m    = var.env
+}
 
 
 
