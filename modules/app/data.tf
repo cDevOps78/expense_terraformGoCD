@@ -5,6 +5,6 @@
 #  skip_tls_verify = true  # VAULT_SKIP_VERIFY
 #}
 
-data "vault_kv_secret" "secret_data" {
-  path = "common/ssh"
-}
+#data "vault_kv_secret" "secret_data" {
+#  path = "common/ssh"
+#}
