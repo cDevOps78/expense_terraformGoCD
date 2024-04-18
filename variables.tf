@@ -10,5 +10,9 @@ variable "vault_token" {}
 
 variable "default-vpc-id" {}
 
+variable "frontend_subnets" {}
+variable "backend_subnets" {}
+variable "mysql_subnets" {}
+
 
 

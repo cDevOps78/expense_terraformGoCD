@@ -5,15 +5,15 @@ resource "aws_vpc" "dev" {
     Name = "${var.env_m}-vpc"
   }
 }
-
-resource "aws_subnet" "main" {
-  vpc_id     = aws_vpc.dev.id
-  cidr_block = "10.10.0.0/24"
-
-  tags = {
-    Name = "10.10.0.0/24-${var.env_m}-subnet"
-  }
-}
+#
+#resource "aws_subnet" "main" {
+#  vpc_id     = aws_vpc.dev.id
+#  cidr_block = "10.10.0.0/24"
+#
+#  tags = {
+#    Name = "10.10.0.0/24-${var.env_m}-subnet"
+#  }
+#}
 
 resource "aws_vpc_peering_connection" "foo" {
   peer_vpc_id   = var.default-vpc-id_m
@@ -35,4 +35,16 @@ resource "aws_route" "default-route" {
   route_table_id             = "rtb-0d3e433084e76a929"
   vpc_peering_connection_id  = aws_vpc_peering_connection.foo.id
   destination_cidr_block     =  aws_vpc.dev.cidr_block
+}
+
+
+resource "aws_subnet" "frontend" {
+  count = length(var.frontend_subnets)
+
+  vpc_id = aws_vpc.dev.id
+  cidr_block = var.frontend_subnets[count.index]
+
+  tags = {
+    Name = "${var.env_m}-frontend${count.index}-${var.frontend_subnets[count.index]}"
+  }
 }
