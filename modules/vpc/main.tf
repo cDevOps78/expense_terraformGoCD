@@ -49,3 +49,27 @@ resource "aws_subnet" "frontend" {
     Name = "${var.env_m}-frontend${count.index+1}-${var.available_zone[count.index]}-${var.frontend_subnets[count.index]}"
   }
 }
+
+resource "aws_subnet" "backend" {
+  count = length(var.backend_subnets)
+
+  vpc_id = aws_vpc.dev.id
+  cidr_block = var.backend_subnets[count.index]
+  availability_zone = var.available_zone[count.index]
+
+  tags = {
+    Name = "${var.env_m}-backend${count.index+1}-${var.available_zone[count.index]}-${var.backend_subnets[count.index]}"
+  }
+}
+
+resource "aws_subnet" "mysql" {
+  count = length(var.mysql_subnets)
+
+  vpc_id = aws_vpc.dev.id
+  cidr_block = var.mysql_subnets[count.index]
+  availability_zone = var.available_zone[count.index]
+
+  tags = {
+    Name = "${var.env_m}-mysql${count.index+1}-${var.available_zone[count.index]}-${var.mysql_subnets[count.index]}"
+  }
+}
