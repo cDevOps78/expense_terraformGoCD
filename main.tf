@@ -76,13 +76,7 @@ terraform {
 
 
 # VPC Code #
-module "dev-vpc" {
-  source                   = "./modules/vpc"
-  vpc_cidr_block_m         = var.vpc_cidr_block
-  env_m                    = var.env
-  subnet_cidr_block_m      = var.subnet_cidr_block
-  default_vpc_id_m         = "vpc-0dfa2ee2180ae8e1a"
-}
+
 
 
 
