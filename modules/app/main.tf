@@ -31,7 +31,7 @@ resource "aws_security_group" "security_group" {
 resource "aws_instance" "instance" {
   ami                      = var.ami_m
   instance_type            = var.instance_type_m
-  vpc_security_group_ids   = aws_security_group.security_group.id
+  vpc_security_group_ids   = [aws_security_group.security_group.id]
   subnet_id                = var.subnets_m[0]
   tags          = merge(var.tags_m,{
 
