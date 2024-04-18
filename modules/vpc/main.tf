@@ -24,3 +24,15 @@ resource "aws_vpc_peering_connection" "foo" {
     Name = "dev-vpc to default-vpc"
   }
 }
+
+resource "aws_route" "dev-route" {
+  route_table_id             = aws_vpc.dev.default_route_table_id
+  vpc_peering_connection_id  = aws_vpc_peering_connection.foo.id
+  destination_cidr_block     =  "172.31.0.0/16"
+}
+
+resource "aws_route" "default-route" {
+  route_table_id             = "rtb-0d3e433084e76a929"
+  vpc_peering_connection_id  = aws_vpc_peering_connection.foo.id
+  destination_cidr_block     =  aws_vpc.dev.cidr_block
+}
