@@ -78,9 +78,13 @@ terraform {
 # VPC Code #
 
 module "dev-vpc" {
-  source           = "./modules/vpc"
-  env_m            = var.env
-  default-vpc-id_m =  var.default-vpc-id
+  source              = "./modules/vpc"
+  env_m               = var.env
+  default-vpc-id_m    =  var.default-vpc-id
+  frontend_subnets    = var.frontend_subnets
+  backend_subnets     =  var.backend_subnets
+  mysql_subnets       =  var.mysql_subnets
+  available_zone      =  var.available_zone
 }
 
 
