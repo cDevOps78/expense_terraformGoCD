@@ -140,7 +140,7 @@ resource "aws_route_table" "backend-rt" {
 
 
   tags = {
-    Name = "${var.env_m}-backend-rt${count.index+1}-${var.available_zone[count.index]}-${var.frontend_subnets[count.index]}"
+    Name = "${var.env_m}-backend-rt${count.index+1}-${var.available_zone[count.index]}-${var.backend_subnets[count.index]}"
   }
 }
 
