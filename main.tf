@@ -36,20 +36,21 @@ terraform {
 
 
 
-#
-#module "frontend" {
-#  depends_on = [module.backend]
-#
-#  source                      = "./modules/app"
-#  ami_m                       = "ami-090252cbe067a9e58"
-#  instance_type_m             = "t2.micro"
-#  vpc_security_group_ids_m    = var.vpc_security_group_ids
-#  tags_m                      = var.tags["frontend"]
-#  component_m                 = "frontend"
-#  env_m                       = var.env
-#  vault_token_m               = var.vault_token
-#}
-#
+
+module "frontend" {
+ // depends_on = [module.backend]
+
+  source                      = "./modules/app"
+  ami_m                       = "ami-090252cbe067a9e58"
+  instance_type_m             = "t2.micro"
+  tags_m                      = var.tags["frontend"]
+  component_m                 = "frontend"
+  env_m                       = var.env
+  vault_token_m               = var.vault_token
+  vpc_id_m                    = module.dev-vpc.vpc_id
+  subnets_m                   = module.dev-vpc.frontend_subnets
+}
+
 module "backend" {
   // depends_on = [module.mysql]
 
