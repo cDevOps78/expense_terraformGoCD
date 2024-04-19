@@ -77,7 +77,7 @@ resource "aws_route_table_association" "public-rt-a" {
 
 resource "aws_eip" "eips" {
   count    = length(var.public_subnets)
-  subnet_id   = aws_subnet.public-subnets[count.index].id
+  domain   = "vpc"
 }
 
 
