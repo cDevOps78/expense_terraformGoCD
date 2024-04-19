@@ -50,18 +50,21 @@ terraform {
 #  vault_token_m               = var.vault_token
 #}
 #
-#module "backend" {
-#  depends_on = [module.mysql]
-#
-#  source                      = "./modules/app"
-#  ami_m                       = "ami-090252cbe067a9e58"
-#  instance_type_m             = "t2.micro"
-#  vpc_security_group_ids_m    = var.vpc_security_group_ids
-#  tags_m                      = var.tags["backend"]
-#  component_m                 = "backend"
-#  env_m                       = var.env
-#  vault_token_m               = var.vault_token
-#}
+module "backend" {
+  depends_on = [module.mysql]
+
+  source                      = "./modules/app"
+  ami_m                       = "ami-090252cbe067a9e58"
+  instance_type_m             = "t2.micro"
+  vpc_security_group_ids_m    = var.vpc_security_group_ids
+  tags_m                      = var.tags["backend"]
+  component_m                 = "backend"
+  env_m                       = var.env
+  vault_token_m               = var.vault_token
+  vpc_id_m                    = module.dev-vpc.vpc_id
+  subnets_m                   = module.dev-vpc.backed_subnets
+
+}
 
 module "mysql" {
   source                      = "./modules/app"
