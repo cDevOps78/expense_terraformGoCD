@@ -51,7 +51,7 @@ terraform {
 #}
 #
 module "backend" {
-  depends_on = [module.mysql]
+  // depends_on = [module.mysql]
 
   source                      = "./modules/app"
   ami_m                       = "ami-090252cbe067a9e58"
