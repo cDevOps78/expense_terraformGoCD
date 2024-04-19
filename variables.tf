@@ -15,5 +15,6 @@ variable "backend_subnets" {}
 variable "mysql_subnets" {}
 
 variable "available_zone" {}
+variable "public_subnets" {}
 
 

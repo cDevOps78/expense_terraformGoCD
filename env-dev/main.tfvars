@@ -25,7 +25,7 @@ mysql_subnets  = ["10.10.0.128/27","10.10.0.160/27"]
 
 available_zone = ["us-east-1a","us-east-1b"]
 
-#public_subnets  = ["10.10.0.192/27","10.10.0.224/27"]
+public_subnets  = ["10.10.0.192/27","10.10.0.224/27"]
 
 
 
