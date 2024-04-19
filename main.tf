@@ -62,18 +62,18 @@ terraform {
 #  env_m                       = var.env
 #  vault_token_m               = var.vault_token
 #}
-#
-module "mysql" {
-  source                      = "./modules/app"
-  ami_m                       = var.ami
-  instance_type_m             = "t2.micro"
-  tags_m                      = var.tags["mysql"]
-  component_m                 = "mysql"
-  env_m                       = var.env
-  vault_token_m               = var.vault_token
-  vpc_id_m                    = module.dev-vpc.vpc_id
-  subnets_m                   = module.dev-vpc.mysql_subnets
-}
+
+#module "mysql" {
+#  source                      = "./modules/app"
+#  ami_m                       = var.ami
+#  instance_type_m             = "t2.micro"
+#  tags_m                      = var.tags["mysql"]
+#  component_m                 = "mysql"
+#  env_m                       = var.env
+#  vault_token_m               = var.vault_token
+#  vpc_id_m                    = module.dev-vpc.vpc_id
+#  subnets_m                   = module.dev-vpc.mysql_subnets
+#}
 
 
 # VPC Code #
