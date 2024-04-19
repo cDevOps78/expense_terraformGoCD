@@ -75,8 +75,21 @@ resource "aws_route_table_association" "public-rt-a" {
 }
 
 
+resource "aws_eip" "eips" {
+  count    = length(var.public_subnets)
+  domain   = aws_vpc.dev.id
+}
 
 
+resource "aws_nat_gateway" "nat-igw" {
+  count        = length(var.public_subnets)
+  allocation_id = aws_eip.eips[count.index].id
+  subnet_id     = aws_subnet.public-subnets[count.index].id
+
+  tags = {
+    Name = "${var.env_m}-nat-igw${count.index+1}-${var.available_zone[count.index]}-${var.public_subnets[count.index]}"
+  }
+}
 
 
 
@@ -99,6 +112,10 @@ resource "aws_route_table" "frontend-rt" {
   route {
     cidr_block = "172.31.0.0/16"
     vpc_peering_connection_id = aws_vpc_peering_connection.foo.id
+  }
+  route {
+    cidr_block = "0.0.0.0/0"
+    nat_gateway_id = aws_nat_gateway.nat-igw[count.index].id
   }
 
 
@@ -137,6 +154,10 @@ resource "aws_route_table" "backend-rt" {
     cidr_block = "172.31.0.0/16"
     vpc_peering_connection_id = aws_vpc_peering_connection.foo.id
   }
+  route {
+    cidr_block = "0.0.0.0/0"
+    nat_gateway_id = aws_nat_gateway.nat-igw[count.index].id
+  }
 
 
   tags = {
@@ -174,7 +195,10 @@ resource "aws_route_table" "mysql-rt" {
     cidr_block = "172.31.0.0/16"
     vpc_peering_connection_id = aws_vpc_peering_connection.foo.id
   }
-
+  route {
+    cidr_block = "0.0.0.0/0"
+    nat_gateway_id = aws_nat_gateway.nat-igw[count.index].id
+  }
 
   tags = {
     Name = "${var.env_m}-mysql-rt${count.index+1}-${var.available_zone[count.index]}-${var.mysql_subnets[count.index]}"
