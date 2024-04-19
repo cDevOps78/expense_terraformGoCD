@@ -56,7 +56,6 @@ module "backend" {
   source                      = "./modules/app"
   ami_m                       = "ami-090252cbe067a9e58"
   instance_type_m             = "t2.micro"
-  vpc_security_group_ids_m    = var.vpc_security_group_ids
   tags_m                      = var.tags["backend"]
   component_m                 = "backend"
   env_m                       = var.env
