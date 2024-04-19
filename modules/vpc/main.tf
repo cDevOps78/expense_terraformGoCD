@@ -63,7 +63,7 @@ resource "aws_route_table" "public-rt" {
 }
 
 resource "aws_route_table_association" "public-rt-a" {
-  count = length(var.public_subnets)
+  count          = length(var.public_subnets)
   subnet_id      = aws_subnet.public-subnets[count.index].id
   route_table_id = aws_route_table.public-rt[count.index].id
 }
