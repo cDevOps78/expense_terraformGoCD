@@ -57,6 +57,12 @@ resource "aws_route_table" "public-rt" {
     gateway_id = aws_internet_gateway.gw.id
   }
 
+  route {
+    cidr_block = "172.31.0.0/16"
+    vpc_peering_connection_id = aws_vpc_peering_connection.foo.id
+  }
+
+
   tags = {
     Name = "${var.env_m}-public-rt${count.index+1}-${var.available_zone[count.index]}-${var.public_subnets[count.index]}"
   }
@@ -86,6 +92,31 @@ resource "aws_subnet" "frontend" {
   }
 }
 
+resource "aws_route_table" "frontend-rt" {
+  count = length(var.frontend_subnets)
+  vpc_id = aws_vpc.dev.id
+
+  route {
+    cidr_block = "172.31.0.0/16"
+    vpc_peering_connection_id = aws_vpc_peering_connection.foo.id
+  }
+
+
+  tags = {
+    Name = "${var.env_m}-frontend-rt${count.index+1}-${var.available_zone[count.index]}-${var.frontend_subnets[count.index]}"
+  }
+}
+
+resource "aws_route_table_association" "frontend-rt-a" {
+  count          = length(var.frontend_subnets)
+  subnet_id      = aws_subnet.frontend[count.index].id
+  route_table_id = aws_route_table.frontend-rt[count.index].id
+}
+
+
+
+
+
 resource "aws_subnet" "backend" {
   count = length(var.backend_subnets)
 
@@ -98,6 +129,31 @@ resource "aws_subnet" "backend" {
   }
 }
 
+resource "aws_route_table" "backend-rt" {
+  count = length(var.backend_subnets)
+  vpc_id = aws_vpc.dev.id
+
+  route {
+    cidr_block = "172.31.0.0/16"
+    vpc_peering_connection_id = aws_vpc_peering_connection.foo.id
+  }
+
+
+  tags = {
+    Name = "${var.env_m}-backend-rt${count.index+1}-${var.available_zone[count.index]}-${var.frontend_subnets[count.index]}"
+  }
+}
+
+
+resource "aws_route_table_association" "backend-rt-a" {
+  count          = length(var.backend_subnets)
+  subnet_id      = aws_subnet.backend[count.index].id
+  route_table_id = aws_route_table.backend-rt[count.index].id
+}
+
+
+
+
 resource "aws_subnet" "mysql" {
   count = length(var.mysql_subnets)
 
@@ -108,4 +164,25 @@ resource "aws_subnet" "mysql" {
   tags = {
     Name = "${var.env_m}-mysql${count.index+1}-${var.available_zone[count.index]}-${var.mysql_subnets[count.index]}"
   }
+}
+
+resource "aws_route_table" "mysql-rt" {
+  count = length(var.mysql_subnets)
+  vpc_id = aws_vpc.dev.id
+
+  route {
+    cidr_block = "172.31.0.0/16"
+    vpc_peering_connection_id = aws_vpc_peering_connection.foo.id
+  }
+
+
+  tags = {
+    Name = "${var.env_m}-mysql-rt${count.index+1}-${var.available_zone[count.index]}-${var.mysql_subnets[count.index]}"
+  }
+}
+
+resource "aws_route_table_association" "mysql-rt-a" {
+  count          = length(var.mysql_subnets)
+  subnet_id      = aws_subnet.mysql[count.index].id
+  route_table_id = aws_route_table.mysql-rt[count.index].id
 }
