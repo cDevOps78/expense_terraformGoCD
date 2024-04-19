@@ -48,13 +48,13 @@ resource "aws_instance" "instance" {
 #    }
 #  }
 }
-resource "aws_route53_record" "record" {
-  name    = "${var.component_m}-${var.env_m}.azcart.online"
-  type    = "A"
-  zone_id = "Z0144525QEQQSOE8RRNR"
-  ttl     = 30
-  records = [aws_instance.instance.private_ip]
-}
+#resource "aws_route53_record" "record" {
+#  name    = "${var.component_m}-${var.env_m}.azcart.online"
+#  type    = "A"
+#  zone_id = "Z0144525QEQQSOE8RRNR"
+#  ttl     = 30
+#  records = [aws_instance.instance.private_ip]
+#}
 
 #resource "null_resource" "null" {
 #  provisioner "remote-exec" {
