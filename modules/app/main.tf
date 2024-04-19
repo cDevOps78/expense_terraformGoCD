@@ -22,7 +22,6 @@ resource "aws_security_group" "security_group" {
     Name = "${var.component_m}-${var.env_m}-sg"
   }
 
-
 }
 
 
