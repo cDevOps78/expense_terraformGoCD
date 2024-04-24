@@ -14,3 +14,7 @@ output "backed_subnets" {
 output "mysql_subnets" {
   value = aws_subnet.mysql.*.id
 }
+
+output "public_subnets" {
+  value = aws_subnet.public-subnets.*.id
+}

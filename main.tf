@@ -7,38 +7,14 @@ terraform {
 }
 
 #provider "vault" {
-#   address = "https://vault-internal.azcart.online:8200"
-#   skip_tls_verify = true
-#}
-
-#data "vault_kv_secret" "secret_data" {
-#  path = "common/ssh"
-#}
-
-#data "vault_generic_secret" "rundeck_auth" {
-#  path = "common/ssh"
-#}
+#  address = "https://vault-internal.azcart.online:8200"
 #
-#resource "local_file" "vault" {
-#  filename = "/tmp/common"
-#  content = data.vault_generic_secret.rundeck_auth.data_json
+#  # token = ""   VAULT_TOKEN
+#  skip_tls_verify = true  # VAULT_SKIP_VERIFY
 #}
-#
-#data "vault_generic_secret" "duck" {
-#  path = "common1/ssh1"
-#}
-#
-#resource "local_file" "vault1" {
-#  filename = "/tmp/common1"
-#  content = data.vault_generic_secret.duck.data_json
-#}
-
-
-
-
 
 module "frontend" {
- // depends_on = [module.backend]
+  depends_on = [module.backend]
 
   source                      = "./modules/app"
   ami_m                       = "ami-090252cbe067a9e58"
@@ -49,10 +25,14 @@ module "frontend" {
   vault_token_m               = var.vault_token
   vpc_id_m                    = module.dev-vpc.vpc_id
   subnets_m                   = module.dev-vpc.frontend_subnets
+  lb_needed                   = true
+  lb_type                     = "public"
+  lb_subnets                  = module.dev-vpc.public_subnets
+  app_port                    = 80
 }
 
 module "backend" {
-  // depends_on = [module.mysql]
+  depends_on = [module.mysql]
 
   source                      = "./modules/app"
   ami_m                       = "ami-090252cbe067a9e58"
@@ -63,6 +43,10 @@ module "backend" {
   vault_token_m               = var.vault_token
   vpc_id_m                    = module.dev-vpc.vpc_id
   subnets_m                   = module.dev-vpc.backed_subnets
+  lb_needed                   = true
+  lb_type                     = "private"
+  lb_subnets                  = module.dev-vpc.backed_subnets
+  app_port                    = 8080
 
 }
 
@@ -76,6 +60,7 @@ module "mysql" {
   vault_token_m               = var.vault_token
   vpc_id_m                    = module.dev-vpc.vpc_id
   subnets_m                   = module.dev-vpc.mysql_subnets
+  lb_needed                   = false
 }
 
 

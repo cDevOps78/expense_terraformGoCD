@@ -8,4 +8,19 @@ variable "subnets_m" {}
 
 variable "vault_token_m" {}
 
+variable "lb_needed" {
+  default = null
+}
+
+variable "lb_type" {
+  default = null
+}
+
+variable "lb_subnets" {
+  default = null
+}
+
+variable "app_port" {
+  default = null
+}
 
